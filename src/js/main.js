@@ -589,16 +589,16 @@ const example = {
   ],
 };
 
-const API_KEY = '48329924-6906af0078b1de986ec16b549';
-const URL =
-  'https://pixabay.com/api/?key=' +
-  API_KEY +
-  '&q=' +
-  encodeURIComponent('red roses');
-$.getJSON(URL, function (data) {
-  if (parseInt(data.totalHits) > 0)
-    $.each(data.hits, function (i, hit) {
-      console.log(hit.pageURL);
-    });
-  else console.log('No hits');
-});
+// const API_KEY = '48329924-6906af0078b1de986ec16b549';
+// const URL =
+//   'https://pixabay.com/api/?key=' +
+//   API_KEY +
+//   '&q=' +
+//   encodeURIComponent('red roses');
+// $.getJSON(URL, function (data) {
+//   if (parseInt(data.totalHits) > 0)
+//     $.each(data.hits, function (i, hit) {
+//       console.log(hit.pageURL);
+//     });
+//   else console.log('No hits');
+// });
