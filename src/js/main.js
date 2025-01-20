@@ -1,7 +1,6 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const key = '48329924-6906af0078b1de986ec16b549';
 // q - не може перевищуват 100 символів
@@ -602,3 +601,48 @@ const example = {
 //     });
 //   else console.log('No hits');
 // });
+
+const galleryList = document.querySelector('.gallery');
+
+// Тут нижче не розберешся :)))))) Дестркуктуризація? Не чув...
+const elementsArray = example.hits.map(element => {
+  const {
+    webformatURL,
+    largeImageURL,
+    tags,
+    likes,
+    views,
+    comments,
+    downloads,
+  } = element;
+  const addListItem = document.createElement('li');
+  addListItem.classList.add('gallery-item');
+  const imgLink = document.createElement('a');
+  imgLink.classList.add('gallery-link');
+  imgLink.href = largeImageURL;
+  const addImage = document.createElement('img');
+  addImage.alt = tags;
+  addImage.src = webformatURL;
+  //   addImage.width = '100%';
+  //   addImage.height = '100%';
+  addImage.classList.add('gallery-image');
+  imgLink.appendChild(addImage);
+  addListItem.appendChild(imgLink);
+  return addListItem;
+});
+
+galleryList.append(...elementsArray);
+
+let gallery = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionType: 'attr',
+  captionsData: 'alt',
+  captionDelay: 250,
+  captionPosition: 'bottom',
+});
+
+gallery.on('show.simplelightbox', function () {});
+
+gallery.on('error.simplelightbox', function (e) {
+  console.log(e);
+});

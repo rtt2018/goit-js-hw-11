@@ -9,9 +9,20 @@
   </head>
   <body>
     <div class="container">
-      <main>
-        <h1>Крутезна галерея!</h1>
+      <main class="content">
+        <h1 class="header-galery">Крутезна галерея!</h1>
+        <form class="search-form">
+          <label for="">
+            <input
+              type="text"
+              placeholder="Search images..."
+              class="search-field"
+            />
+          </label>
+          <button type="submit" class="search-button">Search</button>
+        </form>
         <div class="loader-wrapper"><div class="loader"></div></div>
+        <ul class="gallery"></ul>
       </main>
     </div>
     <script type="module" src="./js/main.js"></script>
