@@ -623,11 +623,17 @@ const elementsArray = example.hits.map(element => {
   const addImage = document.createElement('img');
   addImage.alt = tags;
   addImage.src = webformatURL;
-  //   addImage.width = '100%';
-  //   addImage.height = '100%';
   addImage.classList.add('gallery-image');
   imgLink.appendChild(addImage);
   addListItem.appendChild(imgLink);
+  const descriptionContainer = document.createElement('div');
+  descriptionContainer.classList.add('description-container');
+  descriptionContainer.innerHTML = `<div class="item-desc-container"><span class="description-name">Likes</span><span class="description-counts">${likes}</span></div>
+    <div class="item-desc-container"><span class="description-name">Views</span><span class="description-counts">${views}</span></div>
+    <div class="item-desc-container"><span class="description-name">Comments</span><span class="description-counts">${comments}</span></div>
+    <div class="item-desc-container"><span class="description-name">Downloads</span><span class="description-counts">${downloads}</span></div>`;
+
+  addListItem.appendChild(descriptionContainer);
   return addListItem;
 });
 
