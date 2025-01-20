@@ -6,15 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>goit-js-hw-11</title>
     <script type="module" crossorigin src="/goit-js-hw-11/index.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-Bgfrje-I.js">
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/vendor-DumFYO8Z.css">
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/index-D_taJkl4.css">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-B2tK5Mqx.js">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/vendor-DnveWo0P.css">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/index-DMlC1dhN.css">
   </head>
   <body>
     <div class="container">
-      <main>
-        <h1>Крутезна галерея!</h1>
+      <main class="content">
+        <h1 class="header-galery">Крутезна галерея!</h1>
+        <form class="search-form">
+          <label for="">
+            <input
+              type="text"
+              placeholder="Search images..."
+              class="search-field"
+            />
+          </label>
+          <button type="submit" class="search-button">Search</button>
+        </form>
         <div class="loader-wrapper"><div class="loader"></div></div>
+        <ul class="gallery"></ul>
       </main>
     </div>
   </body>
