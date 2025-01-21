@@ -2,19 +2,28 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
 import iconSvgError from '../img/allert.svg';
+import iconSvgWarning from '../img/warning.svg';
 
-const API_KEY = '48329924-6906af0078b1de986ec16b549';
 const galleryList = document.querySelector('.gallery');
 const loaderElement = document.querySelector('.loader');
 
 const errFindImagesMessage = {
   message:
-    'Sorry, there are no images matching \n your search query. Please, try again!',
+    'Sorry, there are no images matching <br> your search query. Please, try again!',
   messageColor: '#fff',
   backgroundColor: '#ef4040',
   position: 'topRight',
   iconUrl: iconSvgError,
-  timeout: false,
+};
+
+const owerMaxLengthInputMessg = {
+  message:
+    'Перевищено максимально допустиму кількість символів!<br> Допустимо 100 символів.',
+  messageColor: '#fff',
+  backgroundColor: '#ffa000',
+  position: 'topRight',
+  iconUrl: iconSvgWarning,
+  displayMode: 'once',
 };
 
 function addImagesElements(responseAnswerObject) {
@@ -66,10 +75,26 @@ gallery.on('error.simplelightbox', function (e) {
   console.log(e);
 });
 
-const requestForm = document.querySelector('.search-form');
-requestForm.addEventListener('submit', searchImages);
+const requestImageParam = {
+  image_type: 'photo',
+  orientation: 'horizontal',
+  safesearch: true,
+};
 
-function searchImages(event) {
+const requestForm = document.querySelector('.search-form');
+requestForm.addEventListener('input', checkMaxLengthRequestWords);
+requestForm.addEventListener('submit', event => {
+  searchImages(event, requestImageParam);
+});
+
+function checkMaxLengthRequestWords(event) {
+  if (event.target.value.trim().length > 100) {
+    iziToast.show(owerMaxLengthInputMessg);
+    event.target.value = event.target.value.trim().slice(0, 100);
+  }
+}
+
+function searchImages(event, requestImageParam) {
   // 1. Показуємо лоадер
   // 2. Відсилаємо запит
   // 3. Отримуємо респонз від беку
@@ -78,15 +103,20 @@ function searchImages(event) {
   //   5.1 Якщо результат прийшов без зображень, то виводимо повідомленння
   //   5.2 Якщо зображення знайдено, додаємо елементи у галерею
   // 6.Робимо релоад сімпллайтбоксу
+
   event.preventDefault();
   loaderElement.classList.remove('visually-hidden');
   galleryList.innerHTML = '';
-  const URL =
+  const API_KEY = '48329924-6906af0078b1de986ec16b549';
+  let URL =
     'https://pixabay.com/api/?key=' +
-    API_KEY +
+    `${API_KEY}` +
     '&q=' +
-    encodeURIComponent(event.currentTarget.requestField.value);
-  console.log('searchImages  URL:', URL);
+    encodeURIComponent(event.currentTarget.requestField.value.trim());
+  // Динамічне додавання параметрів для запиту
+  for (const param in requestImageParam) {
+    URL += `&${param}=${requestImageParam[param]}`;
+  }
 
   fetch(URL, {
     headers: {
@@ -103,14 +133,13 @@ function searchImages(event) {
       if (data.hits.length === 0) {
         throw new Error(response.status);
       }
-      setTimeout(2000);
       loaderElement.classList.add('visually-hidden');
-      console.log(data);
       addImagesElements(data);
       gallery.refresh();
     })
     .catch(() => {
       iziToast.show(errFindImagesMessage);
+      requestForm.reset();
     })
     .finally(() => {
       loaderElement.classList.add('visually-hidden');
