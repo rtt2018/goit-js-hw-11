@@ -105,6 +105,9 @@ function searchImages(event, requestImageParam) {
   // 6.Робимо релоад сімпллайтбоксу
 
   event.preventDefault();
+  if (event.currentTarget.requestField.value.trim().length === 0) {
+    return;
+  }
   loaderElement.classList.remove('visually-hidden');
   galleryList.innerHTML = '';
   const API_KEY = '48329924-6906af0078b1de986ec16b549';
@@ -113,6 +116,7 @@ function searchImages(event, requestImageParam) {
     `${API_KEY}` +
     '&q=' +
     encodeURIComponent(event.currentTarget.requestField.value.trim());
+
   // Динамічне додавання параметрів для запиту
   for (const param in requestImageParam) {
     URL += `&${param}=${requestImageParam[param]}`;
@@ -131,7 +135,7 @@ function searchImages(event, requestImageParam) {
     })
     .then(data => {
       if (data.hits.length === 0) {
-        throw new Error(response.status);
+        throw new Error('Zero length');
       }
       loaderElement.classList.add('visually-hidden');
       addImagesElements(data);
@@ -139,9 +143,9 @@ function searchImages(event, requestImageParam) {
     })
     .catch(() => {
       iziToast.show(errFindImagesMessage);
-      requestForm.reset();
     })
     .finally(() => {
+      requestForm.reset();
       loaderElement.classList.add('visually-hidden');
     });
 }
