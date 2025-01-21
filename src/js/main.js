@@ -62,6 +62,7 @@ function searchImages(event) {
   //   5.1 Якщо результат прийшов без зображень, то виводимо повідомленння
   //   5.2 Якщо зображення знайдено, додаємо елементи у галерею
   // 6.Робимо релоад сімпллайтбоксу
+  // 7. Очищуємо все
 
   event.preventDefault();
   if (event.currentTarget.requestField.value.trim().length === 0) {
@@ -89,7 +90,7 @@ function searchImages(event) {
       if (data.hits.length === 0) {
         throw new Error('Zero result length');
       }
-      loaderElement.classList.add('visually-hidden');
+      //   loaderElement.classList.add('visually-hidden');
       const elementsArray = getElementsArray(data);
       galleryList.append(...elementsArray);
       gallery.refresh();
