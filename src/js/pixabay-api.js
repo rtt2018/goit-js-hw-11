@@ -12,7 +12,6 @@ export default function getRequestURL(requestWords) {
     '&q=' +
     encodeURIComponent(requestWords);
 
-  // Динамічне додавання параметрів для запиту
   for (const param in requestImageParam) {
     URL += `&${param}=${requestImageParam[param]}`;
   }
