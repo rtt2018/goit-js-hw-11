@@ -4,7 +4,7 @@ import SimpleLightbox from 'simplelightbox';
 import iconSvgError from '../img/allert.svg';
 import iconSvgWarning from '../img/warning.svg';
 import getRequestURL from './pixabay-api.js';
-import addImagesElements from './render-functions.js';
+import getElementsArray from './render-functions.js';
 
 const galleryList = document.querySelector('.gallery');
 const loaderElement = document.querySelector('.loader');
@@ -88,14 +88,11 @@ function searchImages(event) {
     })
     .then(data => {
       if (data.hits.length === 0) {
-        throw new Error('Zero length');
+        throw new Error('Zero result length');
       }
-
       loaderElement.classList.add('visually-hidden');
-      const elementsArray = addImagesElements(data);
-      console.log('searchImages  elementsArray:', elementsArray);
+      const elementsArray = getElementsArray(data);
       galleryList.append(...elementsArray);
-
       gallery.refresh();
     })
     .catch(() => {

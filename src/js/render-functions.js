@@ -1,4 +1,4 @@
-export default function addImagesElements(responseAnswerObject) {
+export default function getElementsArray(responseAnswerObject) {
   const elementsArray = responseAnswerObject.hits.map(element => {
     const {
       webformatURL,
