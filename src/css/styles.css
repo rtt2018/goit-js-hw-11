@@ -58,7 +58,7 @@
   }
 }
 
-.loader-wrapper {
+.loader {
   margin: 0 auto;
   margin-top: 40px;
 }
@@ -92,10 +92,23 @@ ol {
   padding-left: 0;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}
+
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 24px;
   margin: 24px auto;
   max-width: 1128px;
@@ -106,7 +119,7 @@ ol {
   overflow: hidden;
   width: 360px;
   height: 200px;
-  border: 1px solid #000;
+  border: 1px solid #808080;
   border-radius: 8px;
   transition: transform 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
@@ -192,4 +205,31 @@ ol {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 8px;
+}
+
+.description-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 133%;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+.description-counts {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 200%;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+.iziToast-message {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.03em;
+  color: #fafafb;
 }
