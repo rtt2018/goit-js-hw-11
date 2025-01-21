@@ -73,7 +73,6 @@ function searchImages(event) {
   const responseUrl = getRequestURL(
     event.currentTarget.requestField.value.trim()
   );
-  console.log('searchImages  responseUrl:', responseUrl);
 
   fetch(responseUrl, {
     headers: {
