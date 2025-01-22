@@ -4,7 +4,7 @@ import SimpleLightbox from 'simplelightbox';
 import iconSvgError from '../img/allert.svg';
 import iconSvgWarning from '../img/warning.svg';
 import getRequestURL from './pixabay-api.js';
-import getElementsArray from './render-functions.js';
+import addGalleryElements from './render-functions.js';
 
 const galleryList = document.querySelector('.gallery');
 const loaderElement = document.querySelector('.loader');
@@ -90,16 +90,14 @@ function searchImages(event) {
       if (data.hits.length === 0) {
         throw new Error('Zero result length');
       }
-      //   loaderElement.classList.add('visually-hidden');
-      const elementsArray = getElementsArray(data);
-      galleryList.append(...elementsArray);
+      addGalleryElements(galleryList, data);
       gallery.refresh();
     })
     .catch(() => {
       iziToast.show(errFindImagesMessage);
     })
     .finally(() => {
-      requestForm.reset();
       loaderElement.classList.add('visually-hidden');
+      requestForm.reset();
     });
 }

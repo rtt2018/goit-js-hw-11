@@ -1,4 +1,4 @@
-export default function getElementsArray(responseAnswerObject) {
+export default function addGalleryElements(element, responseAnswerObject) {
   const elementsArray = responseAnswerObject.hits.map(element => {
     const {
       webformatURL,
@@ -17,6 +17,8 @@ export default function getElementsArray(responseAnswerObject) {
     const addImage = document.createElement('img');
     addImage.alt = tags;
     addImage.src = webformatURL;
+    addImage.width = '360';
+    addImage.height = '200';
     addImage.classList.add('gallery-image');
     imgLink.appendChild(addImage);
     addListItem.appendChild(imgLink);
@@ -30,5 +32,5 @@ export default function getElementsArray(responseAnswerObject) {
     addListItem.appendChild(descriptionContainer);
     return addListItem;
   });
-  return elementsArray;
+  element.append(...elementsArray);
 }
