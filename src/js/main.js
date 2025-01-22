@@ -74,6 +74,7 @@ function searchImages(event) {
   const responseUrl = getRequestURL(
     event.currentTarget.requestField.value.trim()
   );
+  requestForm.reset();
 
   fetch(responseUrl, {
     headers: {
@@ -88,7 +89,8 @@ function searchImages(event) {
     })
     .then(data => {
       if (data.hits.length === 0) {
-        throw new Error('Zero result length');
+        iziToast.show(errFindImagesMessage);
+        return;
       }
       addGalleryElements(galleryList, data);
       gallery.refresh();
@@ -98,6 +100,5 @@ function searchImages(event) {
     })
     .finally(() => {
       loaderElement.classList.add('visually-hidden');
-      requestForm.reset();
     });
 }
