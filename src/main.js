@@ -3,8 +3,8 @@ import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
 import iconSvgError from '../img/allert.svg';
 import iconSvgWarning from '../img/warning.svg';
-import getRequestURL from './pixabay-api.js';
-import addGalleryElements from './render-functions.js';
+import getRequestURL from './js/pixabay-api.js';
+import addGalleryElements from './js/render-functions.js';
 
 const galleryList = document.querySelector('.gallery');
 const loaderElement = document.querySelector('.loader');
